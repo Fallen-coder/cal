@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: auto;
+        width: 500px;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="name" />
+    <input type="number" id="points" />
+    <input type="number" id="maxpoints" />
+
+    <select id="vērtība" name="atzīme">
+      <option value="percent">Procentuālā vērtība (0-100)</option>
+      <option value="letter">Burtu vērtējums (A, B, C utt.)</option>
+    </select>
+    <button id="btn">apstiprini</button>
+    <p id="output"></p>
+
+    <script>
+      let pointsInput = document.getElementById("points");
+      let button = document.getElementById("btn");
+      let pointsTotalInput = document.getElementById("maxpoints");
+      let output = document.getElementById("output");
+      let how = document.getElementById("vērtība");
+
+      button.addEventListener("click", handleClick);
+
+      function handleClick() {
+        let points = parseFloat(pointsInput.value);
+        let pointsTotal = parseFloat(pointsTotalInput.value);
+
+        let percent = (points / pointsTotal) * 100;
+
+        if (how.value === "percent") {
+          output.innerHTML = percent.toFixed(2) + "%";
+        } else if (how.value === "letter") {
+          letters(percent);
+        }
+      }
+
+      function letters(percent) {
+        if (percent >= 90) {
+          output.innerHTML = "A";
+        } else if (percent >= 80) {
+          output.innerHTML = "B";
+        } else if (percent >= 70) {
+          output.innerHTML = "C";
+        } else if (percent >= 60) {
+          output.innerHTML = "D";
+        } else if (percent <= 50) {
+          output.innerHTML = "F";
+        }
+      }
+    </script>
+  </body>
+</html>
